@@ -8,6 +8,7 @@ import { BreakableBricks } from './components/BreakableBricks';
 import { FarewellMessage } from './components/FarewellMessage';
 import { SoundManager } from './components/SoundManager';
 import { Volume2, VolumeX } from 'lucide-react';
+import ParticlesBackground from '@/app/Components/ParticlesBackground';
 
 // Static member data - will be replaced with MongoDB later
 const memberData = {
@@ -137,7 +138,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-900 via-purple-800 to-purple-900 relative overflow-hidden">
       {/* Starfield Background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-900 via-purple-900 to-pink-900">
+        <ParticlesBackground />
         {/* Stars */}
         <div className="absolute top-10 left-10 text-yellow-300 text-xs animate-pulse">✦</div>
         <div className="absolute top-20 left-32 text-yellow-300 text-xs animate-pulse delay-500">✦</div>
@@ -148,10 +150,35 @@ export default function Home() {
         <div className="absolute top-80 left-60 text-yellow-300 text-xs animate-pulse delay-300">✦</div>
         <div className="absolute top-96 right-32 text-yellow-300 text-xs animate-pulse delay-1200">✦</div>
         
+        {/* Additional stars */}
+        <div className="absolute top-15 left-80 text-yellow-300 text-xs animate-pulse delay-900">✦</div>
+        <div className="absolute top-45 right-15 text-yellow-300 text-xs animate-pulse delay-1100">✦</div>
+        <div className="absolute top-75 left-40 text-yellow-300 text-xs animate-pulse delay-1300">✦</div>
+        <div className="absolute top-85 right-90 text-yellow-300 text-xs animate-pulse delay-1700">✦</div>
+        
         {/* Plus signs */}
         <div className="absolute top-24 left-60 text-yellow-300 text-sm animate-pulse delay-800">+</div>
         <div className="absolute top-48 right-80 text-yellow-300 text-sm animate-pulse delay-400">+</div>
         <div className="absolute top-72 left-80 text-yellow-300 text-sm animate-pulse delay-1600">+</div>
+        
+        {/* Clouds */}
+        <div className="absolute top-10 left-1/4 w-24 h-12 bg-white/20 rounded-full animate-float"></div>
+        <div className="absolute top-30 right-1/4 w-32 h-14 bg-white/20 rounded-full animate-float delay-300"></div>
+        <div className="absolute top-50 left-1/3 w-28 h-12 bg-white/20 rounded-full animate-float delay-600"></div>
+        
+        {/* Decorative circles */}
+        <div className="absolute top-20 right-1/3 w-8 h-8 border-2 border-pink-300/30 rounded-full animate-pulse delay-200"></div>
+        <div className="absolute top-60 left-1/4 w-6 h-6 border-2 border-purple-300/30 rounded-full animate-pulse delay-500"></div>
+        <div className="absolute top-80 right-1/4 w-10 h-10 border-2 border-blue-300/30 rounded-full animate-pulse delay-800"></div>
+        
+        {/* Hearts */}
+        <div className="absolute top-35 left-1/2 text-pink-300 text-sm animate-bounce delay-400">♥</div>
+        <div className="absolute top-65 right-1/2 text-pink-300 text-sm animate-bounce delay-700">♥</div>
+        
+        {/* Sparkles */}
+        <div className="absolute top-25 right-1/3 text-yellow-200 text-lg animate-spin-slow">✧</div>
+        <div className="absolute top-55 left-1/3 text-yellow-200 text-lg animate-spin-slow delay-300">✧</div>
+        <div className="absolute top-85 right-1/3 text-yellow-200 text-lg animate-spin-slow delay-600">✧</div>
       </div>
 
       {/* Sound Control */}
@@ -163,61 +190,76 @@ export default function Home() {
       </button>
 
       {/* Instructions */}
-      <div className="fixed top-4 left-4 z-50 bg-black/90 text-white p-4 rounded-lg pixel-border">
+      {/* <div className="fixed top-4 left-4 z-50 bg-black/90 text-white p-4 rounded-lg pixel-border">
         <div className="text-sm space-y-1 pixel-text">
           <div>🕹️ Use ← → or A/D to move</div>
           <div>🦘 Press ↑, W, or SPACE to jump</div>
           <div>🔊 Press M to toggle sound</div>
           <div>🪙 Click coins for fun facts!</div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Content */}
-      <main className="relative z-10 max-w-6xl mx-auto px-4 py-8">
+      <main className="relative z-10 max-w-6xl mx-auto px-4 py-8 min-h-screen flex flex-col">
         {/* Tribute Card Section */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-12">
           <TributeCard member={memberData} />
         </div>
 
         {/* Interactive Game Layer */}
-        <div className="relative h-64 mb-8 bg-gradient-to-b from-transparent to-green-600/20 rounded-lg overflow-hidden">
+        <div className="relative h-96 mb-12 bg-gradient-to-b from-transparent to-green-600/20 rounded-lg overflow-hidden shadow-2xl">
           {/* Floating Coins */}
-          <FloatingCoins 
+          <FloatingCoins
             onCoinCollect={handleCoinCollect}
             funFacts={memberData.funFacts}
             soundEnabled={soundEnabled}
           />
-          
+
           {/* Breakable Bricks */}
-          <BreakableBricks 
+          <BreakableBricks
             onBrickDestroy={handleBrickDestroy}
             soundEnabled={soundEnabled}
           />
-          
+
           {/* Interactive Character */}
-          <InteractiveCharacter 
+          <InteractiveCharacter
             position={characterPosition}
             sprite={memberData.avatarSprite}
           />
-          
+
           {/* Ground */}
           <div className="absolute bottom-0 left-0 right-0 h-16 bg-green-600 pixel-border-top">
-            <div className="w-full h-full bg-repeat-x" 
-                 style={{
-                   backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='40' fill='%23059669'/%3E%3Crect width='20' height='20' fill='%23047857'/%3E%3Crect x='20' y='20' width='20' height='20' fill='%23047857'/%3E%3C/svg%3E")`
-                 }}>
-            </div>
+            <div 
+              className="w-full h-full bg-repeat-x"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='40' height='40' fill='%23059669'/%3E%3Crect width='20' height='20' fill='%23047857'/%3E%3Crect x='20' y='20' width='20' height='20' fill='%23047857'/%3E%3C/svg%3E")`
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Score and Lives Display */}
+        <div className="flex justify-between items-center mb-8 px-4">
+          <div className="bg-black/80 text-white px-6 py-3 rounded-lg pixel-border">
+            <div className="text-xl font-bold">Score: {score}</div>
+            <div className="text-sm">Coins: {coinsCollected} | Bricks: {bricksDestroyed}</div>
+          </div>
+          <div className="bg-black/80 text-white px-6 py-3 rounded-lg pixel-border">
+            <div className="text-xl font-bold">Lives: {'❤️'.repeat(lives)}</div>
           </div>
         </div>
 
         {/* Farewell Message */}
         {showMessage && (
-          <FarewellMessage 
-            message={memberData.farewellMessage}
-            memberName={memberData.name}
-          />
+          <div className="mt-auto">
+            <FarewellMessage
+              message={memberData.farewellMessage}
+              memberName={memberData.name}
+            />
+          </div>
         )}
       </main>
+      
 
       {/* Sound Manager */}
       <SoundManager enabled={soundEnabled} />
