@@ -37,6 +37,7 @@ export default function Home() {
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
+  const [isJumping, setIsJumping] = useState(false);
 
   const playSound = useCallback((soundType: string) => {
     if (!soundEnabled) return;
@@ -116,7 +117,11 @@ export default function Home() {
         case 'w':
         case ' ':
           e.preventDefault();
-          playSound('jump');
+          if (!isJumping) {
+            setIsJumping(true);
+            playSound('jump');
+            setTimeout(() => setIsJumping(false), 500);
+          }
           break;
         case 'm':
           setSoundEnabled(prev => !prev);
@@ -126,7 +131,7 @@ export default function Home() {
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [moveCharacter, playSound]);
+  }, [moveCharacter, playSound, isJumping]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -190,14 +195,14 @@ export default function Home() {
       </button>
 
       {/* Instructions */}
-      {/* <div className="fixed top-4 left-4 z-50 bg-black/90 text-white p-4 rounded-lg pixel-border">
+      <div className="opacity-60 fixed top-4 left-4 z-50 bg-black/90 text-white p-4 rounded-lg pixel-border">
         <div className="text-sm space-y-1 pixel-text">
           <div>🕹️ Use ← → or A/D to move</div>
           <div>🦘 Press ↑, W, or SPACE to jump</div>
           <div>🔊 Press M to toggle sound</div>
           <div>🪙 Click coins for fun facts!</div>
         </div>
-      </div> */}
+      </div>
 
       {/* Main Content */}
       <main className="relative z-10 max-w-6xl mx-auto px-4 py-8 min-h-screen flex flex-col">
@@ -225,6 +230,7 @@ export default function Home() {
           <InteractiveCharacter
             position={characterPosition}
             sprite={memberData.avatarSprite}
+            isJumping={isJumping}
           />
 
           {/* Ground */}
@@ -312,6 +318,19 @@ export default function Home() {
         
         .coin-spin {
           animation: coinSpin 2s linear infinite;
+        }
+
+        @keyframes jump {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-100px);
+          }
+        }
+        
+        .animate-jump {
+          animation: jump 0.5s ease-out;
         }
       `}</style>
     </div>

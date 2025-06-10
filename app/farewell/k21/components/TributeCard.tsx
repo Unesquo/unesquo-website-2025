@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import logo from "@/public/logo.png";
+import mario_icon from "./../images/33755_computer game_mario_super mario_icon.png"
+
 
 interface Member {
   name: string;
@@ -20,7 +23,7 @@ export function TributeCard({ member }: TributeCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div className="bg-gradient-to-b from-purple-900 to-purple-800 p-8 pixel-border relative max-w-2xl mx-auto">
+    <div className="bg-gradient-to-b from-pink-800 to-purple-800 p-8 pixel-border relative max-w-2xl mx-auto">
       {/* Top Status Bar */}
       <div className="flex justify-between items-center mb-6">
         {/* Hearts */}
@@ -40,8 +43,9 @@ export function TributeCard({ member }: TributeCardProps) {
         </div>
 
         {/* UNESQUO Logo */}
-        <div className="w-16 h-16 bg-gray-600 pixel-border rounded-full flex items-center justify-center">
-          <span className="text-white text-xs pixel-text">UNESQUO</span>
+        <div className="w-26 h-26 bg-gray-600 pixel-border rounded-full flex items-center justify-center">
+          <Image src={logo} alt="UNESQUO Logo" width={60} height={60} />
+          {/* <span className="text-white text-xs pixel-text">UNESQUO</span> */}
         </div>
       </div>
 
@@ -53,7 +57,10 @@ export function TributeCard({ member }: TributeCardProps) {
       {/* Character Portrait with Guards */}
       <div className="flex items-center justify-center mb-8">
         {/* Left Guard */}
-        <div className="text-6xl mr-8">🤖</div>
+        <div className="text-6xl mr-8">
+        <Image src={mario_icon} alt="Mario" width={88} height={88} className="transform -scale-x-100" />
+        {/* 🤖 */}
+        </div>
         
         {/* Portrait */}
         <div className="relative">
@@ -74,7 +81,9 @@ export function TributeCard({ member }: TributeCardProps) {
         </div>
 
         {/* Right Guard */}
-        <div className="text-6xl ml-8">🤖</div>
+        <div className="text-6xl ml-8">
+          <Image src={mario_icon} alt="Mario" width={88} height={88} />
+        </div>
       </div>
 
       {/* Ground/Platform */}
@@ -103,7 +112,12 @@ export function TributeCard({ member }: TributeCardProps) {
       {/* Insert Coin Message */}
       <div className="mt-6 text-center">
         <div className="bg-black p-4 pixel-border">
-          <div className="text-cyan-400 text-lg pixel-text">INSERT COIN TO RESTART LIFE</div>
+          <button 
+            onClick={() => alert("ab to passout ho gye")}
+            className="text-cyan-400 text-lg pixel-text hover:text-cyan-300 transition-colors"
+          >
+            INSERT COIN TO RESTART LIFE
+          </button>
         </div>
       </div>
 
