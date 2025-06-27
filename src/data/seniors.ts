@@ -186,8 +186,8 @@ export const seniors = {
       "Created the club's digital backbone"
     ]
   },
-  "mar-harshvardhan": {
-    name: "MAR HARSHVARDHAN",
+  "kumar-harshvardhan": {
+    name: "KUMAR HARSHVARDHAN",
     guildRank: "SENIOR EXECUTIVE",
     playerRole: "Cache me if you can",
     favoriteWeapon: "ABXY",
