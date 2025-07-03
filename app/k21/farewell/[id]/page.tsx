@@ -2,10 +2,16 @@
 import React, { useState } from "react";
 import { seniors } from "../../data/seniors";
 import Particles from "../../components/Particles";
+import GooeyNav from "../../components/GooeyNav";
 
 interface FarewellPageProps {
   params: { id: string };
 }
+const items = [
+    { label: "Home", href: "#" },
+    { label: "FunFacts", href: "#" },
+    { label: "Message", href: "#" },
+  ];
 
 const FarewellPage: React.FC<FarewellPageProps> = ({ params }) => {
   const { id } = params;
@@ -24,8 +30,9 @@ const FarewellPage: React.FC<FarewellPageProps> = ({ params }) => {
   }
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="bg-black relative w-full h-screen overflow-hidden">
       {/* Particle background */}
+      
       <Particles
         particleColors={["#5949A7", "#AA3143"]}
         particleCount={1000}
@@ -41,6 +48,19 @@ const FarewellPage: React.FC<FarewellPageProps> = ({ params }) => {
       {/* Main senior info — hidden when any popup is active */}
       { (
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-white p-4 text-center backdrop-blur-0">
+          <div style={{ height: '6000px', position: 'relative' }}>
+  <GooeyNav
+    items={items}
+    particleCount={15}
+    particleDistances={[90, 10]}
+    particleR={100}
+    initialActiveIndex={0}
+    animationTime={600}
+    timeVariance={300}
+    colors={[1, 2, 3, 4]}
+  />
+</div>
+
           <img
             src={seniorData.imageUrl}
             alt={seniorData.name}
