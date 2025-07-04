@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Press Start 2P Font */
+.font-press-start {
+  font-family: var(--font-press-start), monospace;
+}
+
 :root {
   --color-border: #424242;
   --color-bg: #111111;
