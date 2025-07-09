@@ -6,6 +6,9 @@ import BounceCards from "../components/BounceCards";
 import { seniors } from "../data/seniors";
 import { useRouter } from "next/navigation";
 import { Press_Start_2P } from 'next/font/google';
+import ClickSpark from "../components/ClickSpark";
+import GradientText from "../components/GradientText";
+
 
 const pressStart2P = Press_Start_2P({ 
   weight: '400',
@@ -14,9 +17,9 @@ const pressStart2P = Press_Start_2P({
 
 const images = [
   "/images/_MG_9409.jpg",
-  "/images/chhavi.jpeg",
-  "/images/harsh.jpg",
-  "/images/akash.jpeg",
+  "https://res.cloudinary.com/djs2cpfmg/image/upload/v1752042514/WhatsApp_Image_2025-07-03_at_3.06.42_PM_1_sauqwt.jpg",
+  "https://res.cloudinary.com/djs2cpfmg/image/upload/v1752042446/WhatsApp_Image_2025-07-03_at_3.06.41_PM_p6p6ce.jpg",
+  "https://res.cloudinary.com/djs2cpfmg/image/upload/v1752042481/WhatsApp_Image_2025-07-03_at_3.06.42_PM_vfbwjs.jpg",
 ];
 
 const transformStyles = [
@@ -48,7 +51,7 @@ const FarewellPage: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen overflow-hidden !overflow-x-hidden">
       {/* CSS animations */}
       <style jsx>{`
         @keyframes fadeInUp {
@@ -414,6 +417,13 @@ const FarewellPage: React.FC = () => {
       `}</style>
       
       {/* fixed Lightning as background */}
+      <ClickSpark
+      sparkColor='#fff'
+      sparkSize={10}
+      sparkRadius={15}
+      sparkCount={8}
+      duration={400}
+      >
       <div className="fixed inset-0 -z-10">
         <Lightning hue={230} xOffset={0} speed={1} intensity={1} size={1} />
       </div>
@@ -486,13 +496,13 @@ const FarewellPage: React.FC = () => {
         <div className="min-h-screen bg-gradient-to-b from-transparent via-black/20 to-black/40 py-20">
           <div className="container mx-auto px-4">
             {/* Search bar */}
-            <div className="mb-8">
+            <div className="mb-8 flex justify-center ">
               <input
                 type="text"
                 placeholder="Search seniors..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full max-w-md p-4 rounded-full bg-black/70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-all duration-300"
+                className="w-full max-w-md p-4 rounded-full bg-black/60 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 transition-all duration-300"
               />
             </div>
 
@@ -539,9 +549,15 @@ const FarewellPage: React.FC = () => {
         <div className="bg-gradient-to-t from-black/80 to-transparent py-16">
           <div className="container mx-auto px-4 text-center">
             <div className="max-w-2xl mx-auto">
-              <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Thank You for Everything! 💝
-              </h3>
+              <GradientText
+              colors={["#ff69b4", "#ff1493", "#db7093", "#ff69b4", "#ff1493"]}
+              animationSpeed={3}
+              showBorder={false}
+              className="custom-class text-3xl mb-6 font-bold "
+              // className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
+            >
+              Thank You for Everything! 💝
+            </GradientText>
               <p className="text-gray-300 text-lg mb-8 leading-relaxed">
                 Your guidance, wisdom, and friendship have shaped our journey. 
                 As you embark on new adventures, know that you'll always be a part of our story.
@@ -556,8 +572,10 @@ const FarewellPage: React.FC = () => {
             </div>
           </div>
         </div>
+        
 
       </div>
+      </ClickSpark>
     </div>
   );
 };

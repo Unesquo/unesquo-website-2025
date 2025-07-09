@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from 'next/image';
 import unesquoLogo from '../../../../public/logo.png';
 import styles from '../../../Components/bitmun/loading/UnesquoLoading.module.css';
+import { FaHome } from "react-icons/fa";
 
 interface FarewellPageProps {
   params: { id: string };
@@ -101,6 +102,13 @@ const FarewellPage: React.FC<FarewellPageProps> = ({ params }) => {
             {/* Navigation */}
             <nav className="fixed top-6 sm:top-4 right-2 sm:right-4 z-50 flex flex-row gap-2 sm:gap-2 p-2 sm:p-2 rounded-lg bg-black/20 backdrop-blur-sm text-xs">
               <button
+                onClick={() => window.location.href = '/k21/farewell'}
+                className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg transition-all font-press-start ${'bg-white/10 hover:bg-white/20 text-white'
+                }`}
+              >
+                <FaHome  />
+              </button>
+              <button
                 onClick={() => setActiveSection('main')}
                 className={`px-2 sm:px-3 py-1 sm:py-2 rounded-lg transition-all font-press-start ${
                   activeSection === 'main' 
@@ -162,7 +170,7 @@ const FarewellPage: React.FC<FarewellPageProps> = ({ params }) => {
                           <img
                             src={seniorData.imageUrl}
                             alt={seniorData.name}
-                            className="relative w-48 h-60 sm:w-56 sm:h-72 md:w-64 md:h-80 lg:w-72 lg:h-96 object-cover border-4 border-white/20 rounded-lg"
+                            className="relative w-48 h-60 sm:w-56 sm:h-72 md:w-64 md:h-80 lg:w-72 lg:h-96 object-cover border-4 border-white/20 rounded-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:border-pink-400/60"
                           />
                         </div>
                         <motion.h1 
